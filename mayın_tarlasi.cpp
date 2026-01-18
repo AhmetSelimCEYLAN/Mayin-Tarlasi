@@ -32,7 +32,7 @@ void Game::flag(int index)
 {
 	board[index].isFlag=true;
 }
-#include <queue>
+
 
 void Game::bomb(int index)
 {
@@ -175,6 +175,23 @@ void Game::computeAdj()
     }
 }
 
+bool Game::isWinningFlag()
+{
+	for(int i=0; i<board.size(); i++)
+	{
+		if(board[i].isFlag!=board[i].isMine) return 0;
+	}
+	return 1;
+}
+
+bool Game::isWinningBomb()
+{
+	for(int i=0; i<board.size(); i++)
+	{
+		if(!board[i].isOpen!=board[i].isMine) return 0;
+	}
+	return 1;
+}
 
 void Game::print_terminal()//No problemo
 {
@@ -272,11 +289,22 @@ void terminal()
 			std::cout << endl << "Kaybettin Canim.";
 			break;
 		}
+		if(yeni.isWinningBomb() or yeni.isWinningFlag())
+		{
+			std::cout << endl << "Kazandýn Canim.";
+			break;
+		}
 	}
     
 }
 int main()
 {
-	terminal();
+	int istek=1;
+	while(istek)
+	{
+		terminal();
+		std::cout << "istek var mý oynama isteði (1->EVET,0->HAYIR): ";
+		std::cin >> istek;
+	}
 	return 0;
 }

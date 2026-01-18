@@ -29,6 +29,8 @@ class Game
 		int get_num() {return mine_num;}
 		bool get_safe() {return isSafe;}
 		void computeAdj();
+		bool isWinningFlag();
+		bool isWinningBomb();
 	private:
 		bool isSafe;
 		int wid;
